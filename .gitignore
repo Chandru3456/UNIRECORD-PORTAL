@@ -1,0 +1,15 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore the database and local settings
+instance/
+*.db
+
+# Ignore uploaded files (keep the folder, ignore the content)
+uploads/*
+!uploads/.gitkeep
+
+# Ignore QR codes generated during testing
+static/*.png
+!static/.gitkeep
