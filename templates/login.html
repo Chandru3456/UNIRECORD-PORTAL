@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Student Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1d20 0%, #343a40 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            color: white;
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-color: #0d6efd;
+            box-shadow: none;
+        }
+        .btn-primary {
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            background: #0d6efd;
+            border: none;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background: #0b5ed7;
+            transform: translateY(-2px);
+        }
+        .brand-logo {
+            font-size: 3rem;
+            color: #0d6efd;
+            margin-bottom: 20px;
+        }
+        .flash-messages {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
 
+<div class="login-card text-center">
+    <div class="brand-logo">
+        <i class="fas fa-university"></i>
+    </div>
+    <h2 class="fw-bold mb-4">Portal Login</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} py-2">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/login" method="POST">
+        <div class="mb-3 text-start">
+            <label class="form-label small ms-1 text-uppercase">Registration ID</label>
+            <div class="input-group">
+                <span class="input-group-text bg-transparent border-end-0 text-white-50"><i class="fas fa-user"></i></span>
+                <input type="text" name="username" id="username_field" class="form-control border-start-0" placeholder="Enter ID" required>
+            </div>
+        </div>
+        
+        <div class="mb-4 text-start">
+            <label class="form-label small ms-1 text-uppercase">Password</label>
+            <div class="input-group">
+                <span class="input-group-text bg-transparent border-end-0 text-white-50"><i class="fas fa-lock"></i></span>
+                <input type="password" name="password" class="form-control border-start-0" placeholder="••••••••" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mb-3 shadow">SIGN IN</button>
+    </form>
+    
+    <p class="text-white-50 small mb-0">Admin? Use your management ID.</p>
+</div>
+
+<script>
+    // This script automatically fills the ID if it comes from the QR Code URL (?id=...)
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentId = urlParams.get('id');
+        if (studentId) {
+            document.getElementById('username_field').value = studentId;
+        }
+    }
+</script>
+</body>
+</html>
