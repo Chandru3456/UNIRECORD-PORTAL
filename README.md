@@ -1,4 +1,4 @@
-# 🎓 UniRecord Dashboard
+# 🎓 securedoc Dashboard
 A secure Student Management System with QR-code login and PDF conversion.
 
 ## 🚀 How to Run
@@ -8,4 +8,5 @@ A secure Student Management System with QR-code login and PDF conversion.
 
 ## 🛠️ Features
 - **QR Authentication:** Instant student lookup.
+
 - **DocVault:** Image-to-PDF conversion for student IDs.
